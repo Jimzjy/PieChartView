@@ -30,9 +30,9 @@ public class PieChart extends View {
     private final float DEFAULT_START_ANGLE = 45;
 
     /*
-     * mPaint1: for Arc
+     * mPaint1: for sector
      * mPaint2: for center circle and center text
-     * mPaint3: for center circle shader
+     * mPaint3: for center circle shadow
      */
     private Paint mPaint1;
     private Paint mPaint2;
@@ -60,7 +60,7 @@ public class PieChart extends View {
 
     private int mCurrentColor;
 
-    //index for which arc touched
+    //index for which sector touched
     private int index;
 
     //list for pie params
@@ -68,10 +68,10 @@ public class PieChart extends View {
     private List<Float> pieValueList;
     private List<String> pieStringList;
 
-    //list for the middle angle of each arc
+    //list for the middle angle of each sector
     private List<Float> angleList;
 
-    //arc radius
+    //sector radius
     private int mRadius;
 
     //center circle radius
@@ -247,7 +247,7 @@ public class PieChart extends View {
     }
 
     /**
-     * @param amount value of each arc
+     * @param amount value of each sector
      */
     private void drawPie(Canvas canvas, float amount) {
 
@@ -262,7 +262,7 @@ public class PieChart extends View {
     }
 
     /**
-     * draw small arc
+     * draw small sector
      */
     private void drawPieTouch(Canvas canvas, float amount) {
 
