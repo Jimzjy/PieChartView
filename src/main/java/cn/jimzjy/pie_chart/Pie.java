@@ -1,7 +1,9 @@
 package cn.jimzjy.pie_chart;
 
 
-
+/**
+ * A module to init PieChart
+ */
 public class Pie {
     public int pieColor;
     public float pieValue;

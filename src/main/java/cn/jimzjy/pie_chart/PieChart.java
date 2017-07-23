@@ -19,38 +19,75 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Jimzjy@gmail.com
+ * @version 1.0.0
+ */
+
 public class PieChart extends View {
 
     private final String TAG = getClass().getSimpleName();
     private final float DEFAULT_START_ANGLE = 45;
+
+    /*
+     * mPaint1: for Arc
+     * mPaint2: for center circle and center text
+     * mPaint3: for center circle shader
+     */
     private Paint mPaint1;
     private Paint mPaint2;
     private Paint mPaint3;
+
+    //get padding size
     private int paddingTop;
     private int paddingBottom;
     private int paddingStart;
     private int paddingEnd;
+
+    //coordinate for center of the view
     private int centerX;
     private int centerY;
+
     private float mStartAngle;
     private float mMaxValue;
     private float mTextSize;
     private float mShaderSize;
+
+    //fraction for animator
     private float curtFraction = 1f;
     private float curtFractionTouch = 1f;
     private float curtFractionTouch2 = 0f;
+
     private int mCurrentColor;
+
+    //index for which arc touched
     private int index;
+
+    //list for pie params
     private List<Integer> pieColorList;
     private List<Float> pieValueList;
     private List<String> pieStringList;
+
+    //list for the middle angle of each arc
     private List<Float> angleList;
+
+    //arc radius
     private int mRadius;
+
+    //center circle radius
     private int circleRadius;
+
+    //coordinate for touch
     private float touchX;
     private float touchY;
+
+    //animator for init pie chart
     private ValueAnimator animator;
+
+    //animator for touch
     private ValueAnimator animatorTouch;
+
+    //center text
     private String text;
 
     public PieChart(Context context) {
@@ -86,7 +123,9 @@ public class PieChart extends View {
         initAnimator();
     }
 
-
+    /**
+     * init Paint and params for pie chart
+     */
     private void initPaint() {
         pieColorList = new ArrayList<>();
         pieValueList = new ArrayList<>();
@@ -108,6 +147,9 @@ public class PieChart extends View {
         mPaint3 = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
+    /**
+     * init animators
+     */
     private void initAnimator() {
 
         animator = ValueAnimator.ofFloat(0, 1f);
@@ -135,6 +177,10 @@ public class PieChart extends View {
 
     }
 
+    /**
+     * @param i index for params list
+     * @return angle to rotation
+     */
     private float getRotationAngle(int i) {
         float angleR;
         float angleT = angleList.get(i);
@@ -193,10 +239,16 @@ public class PieChart extends View {
                 0xFF000000, 0x00FFFFFF, Shader.TileMode.CLAMP));
     }
 
+    /**
+     * start animator to draw pie chart
+     */
     public void startDrawPie() {
         animator.start();
     }
 
+    /**
+     * @param amount value of each arc
+     */
     private void drawPie(Canvas canvas, float amount) {
 
         mPaint1.setColor(mCurrentColor);
@@ -209,6 +261,9 @@ public class PieChart extends View {
 
     }
 
+    /**
+     * draw small arc
+     */
     private void drawPieTouch(Canvas canvas, float amount) {
 
         mPaint1.setColor(mCurrentColor);
@@ -224,6 +279,9 @@ public class PieChart extends View {
 
     }
 
+    /**
+     * @param text center text
+     */
     public void setCenterText(String text){
         this.text = text;
     }
@@ -282,6 +340,10 @@ public class PieChart extends View {
 
     }
 
+    /**
+     * touch transfer
+     * @param i index for params list
+     */
     private void onTouchPie(int i) {
         index = i;
         curtFractionTouch = 1f;
@@ -342,6 +404,10 @@ public class PieChart extends View {
         return true;
     }
 
+    /**
+     * set pie chart params
+     * @param pieList pie params list
+     */
     public void setPie(List<Pie> pieList) {
         mMaxValue = 0;
         curtFractionTouch = 1f;
