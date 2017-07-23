@@ -9,7 +9,7 @@ public class Pie {
     public float pieValue;
     public String pieString;
 
-    Pie(float pieValue,String pieString,int pieColor){
+    public Pie(float pieValue,String pieString,int pieColor){
         this.pieValue = pieValue;
         this.pieColor = pieColor;
         this.pieString = pieString;
