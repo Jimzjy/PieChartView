@@ -6,7 +6,7 @@ A view to create pie chart
 ## Usage
 #### Gradle:
 ```java
-compile 'cn.jimzjy.pie-chart:pie-chart:1.0.1'
+compile 'cn.jimzjy.pie-chart:pie-chart:1.0.2'
 ```
 #### attrs:
   * **pie_radius:** set pie chart radius
